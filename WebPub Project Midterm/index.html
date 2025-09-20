@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eggy's | Quality Clothing for Everyone</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap');
+
+    /* === Base === */
+    body {
+      font-family: 'Montserrat', sans-serif;
+      background-color: #000;
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    /* === Navigation === */
+    nav {
+      background: #000;
+      padding: 0.5rem 1.5rem;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    nav .links {
+      display: flex;
+      gap: 2rem;
+    }
+    nav .links a {
+      color: #aaa;
+      font-weight: 500;
+    }
+    nav .links a.active,
+    nav .links a:hover {
+      color: #fff;
+    }
+    #mobile-menu-button {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    #mobile-menu {
+      display: none;
+      background: #000;
+      padding: 1rem 1.5rem;
+    }
+    #mobile-menu a {
+      display: block;
+      margin: 0.5rem 0;
+      color: #aaa;
+    }
+    #mobile-menu a:hover {
+      color: #fff;
+    }
+
+    /* === Hero Section === */
+    .hero {
+      padding: 4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url('https://i.pinimg.com/736x/5f/21/24/5f2124ee766032d850899008ada7a85c.jpg') center/cover no-repeat;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ddd;
+    }
+
+    /* === Sections General === */
+    section {
+      padding: 5rem 1.5rem;
+    }
+    section h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    /* === Collections === */
+    .collections {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    gap: 2rem;
+    }
+    .collections .item {
+    text-align: center;
+    cursor: pointer;
+    }
+    .collections .item img {
+    width: 100%;
+    height: 350px; /* Fixed height for all images */
+    object-fit: cover; /* Ensures images crop neatly */
+    border-radius: 6px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .collections .item img:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+    }
+    .collections .item p {
+    margin-top: 1rem;
+    font-weight: bold;
+    }
+    @media(min-width: 768px) {
+    .collections { grid-template-columns: repeat(3, 1fr); }
+    }
+
+    /* === Story === */
+    .story {
+      background: #111;
+    }
+    .story .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 3rem;
+      align-items: center;
+    }
+    .story h2 { text-align: left; }
+    .story p {
+      color: #ccc;
+      margin-bottom: 1rem;
+    }
+    .story button {
+      border: 2px solid #fff;
+      background: transparent;
+      color: #fff;
+      padding: 0.75rem 2rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .story button:hover {
+      background: #222;
+    }
+    @media(min-width: 768px) {
+      .story .container {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    /* === Newsletter === */
+    .newsletter {
+      max-width: 800px;
+      margin: 0 auto;
+      background: #111;
+      border-radius: 8px;
+      padding: 2rem;
+      text-align: center;
+    }
+    .newsletter p { color: #ccc; margin-bottom: 1.5rem; }
+    .newsletter .form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .newsletter input {
+      padding: 0.75rem 1rem;
+      background: #222;
+      border: none;
+      border-radius: 6px;
+      color: #fff;
+    }
+    .newsletter button {
+      background: #fff;
+      color: #000;
+      font-weight: bold;
+      padding: 0.75rem 1.5rem;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .newsletter button:hover {
+      background: #ccc;
+    }
+    @media(min-width: 640px) {
+      .newsletter .form { flex-direction: row; }
+      .newsletter input { flex: 1; }
+    }
+
+    /* === Footer === */
+    footer {
+      background: #000;
+      padding: 3rem 1.5rem;
+      border-top: 1px solid #222;
+    }
+    footer .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      gap: 2rem;
+    }
+    footer h3 {
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    footer p, footer a, footer li {
+      color: #aaa;
+      font-size: 0.95rem;
+    }
+    footer a:hover { color: #fff; }
+    @media(min-width: 768px) {
+      footer .container { grid-template-columns: repeat(4, 1fr); }
+    }
+    footer .bottom {
+      border-top: 1px solid #222;
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      text-align: center;
+      color: #aaa;
+      font-size: 0.9rem;
+    }
+
+    /* === Animations === */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container">
+      <div class="brand">Eggy's Urban Lifestyle</div>
+      <div class="links">
+        <a href="index.html" class="active">Home</a>
+        <a href="about.html" >About</a>
+        <a href="features.html">Features</a>
+        <a href="products.html">Products</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      <div id="mobile-menu-button">☰</div>
+    </div>
+    <div id="mobile-menu">
+      <a href="index.html" class="active">Home</a>
+      <a href="about.html">About</a>
+      <a href="features.html">Features</a>
+      <a href="products.html">Products</a>
+      <a href="contact.html">Contact</a>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero fade-in">
+    <div>
+      <h1>STYLE. QUALITY. COMFORT.</h1>
+      <p>Discover clothing that fits every occasion — from everyday essentials to standout pieces for your best moments.</p>
+    </div>
+  </section>
+
+  <!-- Collections -->
+  <section class="fade-in">
+    <h2>OUR COLLECTIONS</h2>
+    <div class="collections">
+      <div class="item">
+        <img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t39.30808-6/548200033_1230364282467943_7274119324747379374_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeF-KCetZc31scjMyTYmP1qD_VSPmTYslQ_9VI-ZNiyVDzxWO6eTtxC_KdoBiz2j7SIH2_-N8Cw3-Jf-EI_3VP0x&_nc_ohc=GtY-cHoNyFAQ7kNvwFc5_eo&_nc_oc=AdmuhzMDbGi9tbs-QoigQWW2bPFA1ESldY7xsxA_dg8u5K2PZ75GjtMuE3M3S04RC6I&_nc_zt=23&_nc_ht=scontent.fcrk1-5.fna&_nc_gid=FY-S5EyenGaZ-QabcVaPZg&oh=00_AfY733XiC9tE1oeItIQMgfl58jBJ76zmZoMedU0fZdMcQA&oe=68D42F1A" alt="Men's Collection">
+        <p>MEN'S WEAR</p>
+      </div>
+      <div class="item">
+        <img src="https://scontent.fcrk1-5.fna.fbcdn.net/v/t39.30808-6/547277773_1227903412714030_8660467205868952540_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGxN5FxUw3SVeesf6KQVPOdQAdwpw6SUj1AB3CnDpJSPX2QlLCRe_9RMTOnpqhpiKUbsp1OpEZSxwTXlmmuUmVE&_nc_ohc=-LFK_YvleB8Q7kNvwGwClho&_nc_oc=AdkxVzEBHMfGMc2_tHBECKIifeo-kYH1seFuRooOQFR5qRelxW1wpLaw2WBJtrZUQBo&_nc_zt=23&_nc_ht=scontent.fcrk1-5.fna&_nc_gid=uIG39Fs0TP4gHHX2fstP4w&oh=00_AfZGmiX7YC-mpdgYqzw24BORfIfzkA5JbqoYWFKDXxZhuA&oe=68D4389E" alt="Women's Collection">
+        <p>WOMEN'S WEAR</p>
+      </div>
+      <div class="item">
+        <img src="https://classymencollection.com/cdn/shop/files/LRM_EXPORT_20180214_144143_600x600.jpg?v=1613172213" alt="Accessories">
+        <p>ACCESSORIES</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Story -->
+  <section class="story fade-in">
+    <div class="container">
+      <div>
+        <h2>OUR STORY</h2>
+        <p>Founded with a passion for style and comfort, Eggy’s has grown into a place where fashion meets everyday life.</p>
+        <p>We believe clothing should not only look good, but also feel great. Every piece is thoughtfully designed using quality materials for people who value both simplicity and confidence in their wardrobe.</p>
+        <button>LEARN MORE</button>
+      </div>
+      <div>
+        <img src="https://scontent.fcrk1-3.fna.fbcdn.net/v/t39.30808-6/511015544_1046767417639689_3553824457417229481_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG2bffkT5Q76kd75iYZKXSbTYFah0ULL_JNgVqHRQsv8oevULS9H0l6iTghWXob3QMnsBlyQ8yEKEMkrXPZb5nd&_nc_ohc=4hPzwU2m4BgQ7kNvwFoYUkf&_nc_oc=AdlcZBUbXWh00hEEwdQ44hgcGvGJF7PrvUzFxOcm_Eoz7a18PJCXnP2Ikw-E_5G23js&_nc_zt=23&_nc_ht=scontent.fcrk1-3.fna&_nc_gid=5A6s1Q1d7OSQJ0lZP0YV8w&oh=00_AfbL9Kbsp6mdmACPx6wyDiOE6d3hJ_Fo3e2_7GSvlTCOhw&oe=68D455A0" alt="Brand Story">
+      </div>
+    </div>
+  </section>
+
+   <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div>
+        <div class="brand">Eggy's</div>
+        <p>Clothing made for comfort, confidence, and everyday life.</p>
+      </div>
+      <div>
+        <h3>SHOP</h3>
+        <ul>
+          <li><a href="products.html">Men's Collection</a></li>
+          <li><a href="products.html">Women's Collection</a></li>
+          <li><a href="products.html">Accessories</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>ABOUT</h3>
+        <ul>
+          <li><a href="about.html#story">Our Story</a></li>
+          <li><a href="about.html#vision">Our Vision</a></li>
+          <li><a href="about.html#sustainability">Sustainability</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3>CONTACT</h3>
+        <ul>
+          <li>123 Main Street</li>
+          <li>City, ST 10001</li>
+          <li>info@eggys.com</li>
+          <li>+1 (555) 123-4567</li>
+        </ul>
+      </div>
+    </div>
+    <div class="bottom">© 2025 Eggy's. All rights reserved.</div>
+  </footer>
+
+
+  <script>
+    // Mobile menu
+    const btn = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    btn.addEventListener("click", () => {
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    });
+
+    // Fade-in animation
+    const faders = document.querySelectorAll('.fade-in');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.2 });
+    faders.forEach(fader => observer.observe(fader));
+  </script>
+</body>
+</html>
