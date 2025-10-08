@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "name": "Maria Santos",
+    "email": "maria.santos@email.com",
+    "message": "I’d like to know more about your upcoming collection."
+  },
+  {
+    "id": 2,
+    "name": "Juan Dela Cruz",
+    "email": "juancruz@email.com",
+    "message": "Do you have discounts for bulk orders?"
+  },
+  {
+    "id": 3,
+    "name": "Andrea Lopez",
+    "email": "andrea.lopez@email.com",
+    "message": "Great quality products! I’ll definitely recommend your store."
+  }
+]

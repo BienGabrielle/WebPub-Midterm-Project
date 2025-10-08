@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Eggy's Urban Lifestyle | Products</title>
+  <link rel="icon" type="image/png" href="icon/EGGY‘S.png">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0;
+      background-color: #000;
+      color: #fff;
+    }
+
+    nav {
+      background: #000;
+      padding: 0.5rem 1.5rem;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    nav .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    nav .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+    .brand-icon {
+      width: 200px;
+      height: auto;
+    }
+    nav .links {
+      display: flex;
+      gap: 2rem;
+      font-size: large;
+    }
+    nav .links a {
+      color: #aaa;
+      font-weight: 500;
+      text-decoration: none;
+    }
+    nav .links a.active,
+    nav .links a:hover {
+      color: #fff;
+    }
+    #mobile-menu-button {
+      display: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+    #mobile-menu {
+      display: none;
+      background: #000;
+      padding: 1rem 1.5rem;
+    }
+    #mobile-menu a {
+      display: block;
+      margin: 0.5rem 0;
+      color: #aaa;
+      text-decoration: none;
+    }
+    #mobile-menu a.active,
+    #mobile-menu a:hover {
+      color: #fff;
+    }
+    @media(max-width: 768px) {
+      nav .links { display: none; }
+      #mobile-menu-button { display: block; }
+    }
+
+    .hero {
+      padding: 4rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+                  url('images/hero.jpg') center/cover no-repeat;
+    }
+    .hero h1 {
+      font-size: 4rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      font-size: 1.5rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #ddd;
+    }
+
+    section {
+      padding: 40px 20px;
+    }
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 30px;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .item {
+      background: #111;
+      border-radius: 10px;
+      overflow: hidden;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .item img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .item p {
+      padding: 15px;
+      font-size: 1.1rem;
+    }
+    .item:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 8px 18px rgba(255, 255, 255, 0.15);
+    }
+    .item:hover img {
+      transform: scale(1.05);
+    }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    footer {
+      background: #000;
+      border-top: 1px solid #333;
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.9);
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .modal-content {
+      background: #111;
+      border-radius: 15px;
+      padding: 25px;
+      max-width: 850px;
+      width: 90%;
+      color: #fff;
+      position: relative;
+    }
+
+    .modal-content h3 {
+      margin-bottom: 20px;
+      font-size: 1.8rem;
+    }
+
+    .modal-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .modal-item {
+      background: #1a1a1a;
+      border-radius: 12px;
+      padding: 15px;
+      height: 340px; 
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 0 10px rgba(255,255,255,0.05);
+      transition: transform 0.3s ease;
+    }
+
+    .modal-item:hover {
+      transform: translateY(-5px);
+    }
+
+    .modal-item img {
+      width: 100%;
+      height: 220px; 
+      object-fit: cover;
+      border-radius: 10px;
+    }
+
+    .modal-item p {
+      margin: 5px 0;
+      font-size: 0.95rem;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <div class="container">
+      <div class="brand">
+        <img src="icon/EGGY‘S.png" alt="Brand Icon" class="brand-icon">
+        Eggy's Urban Lifestyle
+      </div>
+      <div class="links">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="features.html">Features</a>
+        <a href="products.html" class="active">Products</a>
+        <a href="contact.html">Contact</a>
+        <a href="messages.html">Messages</a>
+      </div>
+      <div id="mobile-menu-button">☰</div>
+    </div>
+    <div id="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="features.html">Features</a>
+      <a href="products.html" class="active">Products</a>
+      <a href="contact.html">Contact</a>
+      <a href="messages.html">Messages</a>
+    </div>
+  </nav>
+
+  <section class="hero fade-in">
+    <h1>Products</h1>
+    <p>Explore Eggy’s Urban Lifestyle essentials — from premium streetwear to sleek accessories.</p>
+  </section>
+
+  <section class="fade-in">
+    <h2>Tops</h2>
+    <div class="gallery">
+      <div class="item" data-category="hoodies">
+        <img src="images/products/Hoodie.avif" alt="Hoodie">
+        <p>Hoodies</p>
+      </div>
+      <div class="item" data-category="shirts">
+        <img src="images/products/Shirt.avif" alt="Shirt">
+        <p>Shirts</p>
+      </div>
+      <div class="item" data-category="jackets">
+        <img src="images/products/Jacket.webp" alt="Jacket">
+        <p>Jackets</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fade-in" style="background:#111;">
+    <h2>Bottoms</h2>
+    <div class="gallery">
+      <div class="item" data-category="pants">
+        <img src="images/products/Pants.webp" alt="Pants">
+        <p>Pants</p>
+      </div>
+      <div class="item" data-category="shorts">
+        <img src="images/products/Shorts.avif" alt="Shorts">
+        <p>Shorts</p>
+      </div>
+      <div class="item" data-category="joggers">
+        <img src="images/products/Joggers.webp" alt="Joggers">
+        <p>Joggers</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="fade-in">
+    <h2>Accessories</h2>
+    <div class="gallery">
+      <div class="item" data-category="chains">
+        <img src="images/products/Chain.webp" alt="Chain">
+        <p>Chains</p>
+      </div>
+      <div class="item" data-category="bracelets">
+        <img src="images/products/Bracelet.webp" alt="Bracelet">
+        <p>Bracelets</p>
+      </div>
+      <div class="item" data-category="necklaces">
+        <img src="images/products/Necklace.webp" alt="Necklace">
+        <p>Necklaces</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="fade-in">
+    <p>© 2025 Eggy's. All rights reserved.</p>
+  </footer>
+
+  <div class="modal" id="productModal">
+    <div class="modal-content">
+      <span class="close-btn">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <div class="modal-gallery" id="modalGallery"></div>
+    </div>
+  </div>
+
+  <script>
+    const fadeEls = document.querySelectorAll(".fade-in");
+    const observer = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add("show"); });
+    },{threshold:0.1});
+    fadeEls.forEach(el=>observer.observe(el));
+
+    const btn = document.getElementById("mobile-menu-button");
+    const menu = document.getElementById("mobile-menu");
+    btn.addEventListener("click",()=>menu.style.display=menu.style.display==="block"?"none":"block");
+
+    const productSets = {
+      hoodies: [
+        {name:"Black Urban Hoodie",price:"₱1,499",img:"images/products/Hoodie1.webp"},
+        {name:"Gray Oversized Hoodie",price:"₱1,599",img:"images/products/Hoodie2.webp"},
+        {name:"White Street Hoodie",price:"₱1,399",img:"images/products/Hoodie3.webp"}
+      ],
+      shirts: [
+        {name:"Street Tee Black",price:"₱899",img:"images/products/Shirt1.webp"},
+        {name:"Street Tee White",price:"₱899",img:"images/products/Shirt2.webp"},
+        {name:"Street Tee Gray",price:"₱899",img:"images/products/Shirt3.webp"}
+      ],
+      jackets: [
+        {name:"Classic Bomber",price:"₱2,199",img:"images/products/Jacket1.webp"},
+        {name:"Denim Jacket",price:"₱1,899",img:"images/products/Jacket2.webp"},
+        {name:"Leather Jacket",price:"₱2,599",img:"images/products/Jacket3.webp"}
+      ],
+      pants: [
+        {name:"Cargo Pants",price:"₱1,299",img:"images/products/Pants1.webp"},
+        {name:"Slim Fit Pants",price:"₱1,199",img:"images/products/Pants2.webp"},
+        {name:"Wide Leg Pants",price:"₱1,099",img:"images/products/Pants3.jpg"}
+      ],
+      shorts: [
+        {name:"Denim Shorts",price:"₱899",img:"images/products/Shorts1.avif"},
+        {name:"Tech Shorts",price:"₱999",img:"images/products/Shorts2.webp"},
+        {name:"Athletic Shorts",price:"₱799",img:"images/products/Shorts3.webp"}
+      ],
+      joggers: [
+        {name:"Black Joggers",price:"₱1,199",img:"images/products/Joggers1.webp"},
+        {name:"Gray Joggers",price:"₱1,299",img:"images/products/Joggers2.jpg"},
+        {name:"Olive Joggers",price:"₱1,299",img:"images/products/Joggers3.jpg"}
+      ],
+      chains: [
+        {name:"Silver Chain",price:"₱699",img:"images/products/Chain1.jpg"},
+        {name:"Gold Chain",price:"₱799",img:"images/products/Chain2.jpg"},
+        {name:"Black Chain",price:"₱699",img:"images/products/Chain3.webp"}
+      ],
+      bracelets: [
+        {name:"Leather Bracelet",price:"₱499",img:"images/products/Bracelet1.webp"},
+        {name:"Beaded Bracelet",price:"₱399",img:"images/products/Bracelet2.webp"},
+        {name:"Chain Bracelet",price:"₱499",img:"images/products/Bracelet3.webp"}
+      ],
+      necklaces: [
+        {name:"Pendant Necklace",price:"₱799",img:"images/products/Necklace1.webp"},
+        {name:"Choker Necklace",price:"₱899",img:"images/products/Necklace2.webp"},
+        {name:"Layered Necklace",price:"₱999",img:"images/products/Necklace3.webp"}
+      ]
+    };
+
+    const modal = document.getElementById("productModal");
+    const closeBtn = document.querySelector(".close-btn");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalGallery = document.getElementById("modalGallery");
+
+    document.querySelectorAll(".item").forEach(item=>{
+      item.addEventListener("click",()=>{
+        const cat = item.dataset.category;
+        const set = productSets[cat];
+        modalTitle.textContent = item.querySelector("p").textContent;
+        modalGallery.innerHTML = set.map(p=>`
+          <div class="modal-item">
+            <img src="${p.img}" alt="${p.name}">
+            <p><strong>${p.name}</strong></p>
+            <p>${p.price}</p>
+          </div>
+        `).join('');
+        modal.style.display = "flex";
+      });
+    });
+
+    closeBtn.addEventListener("click",()=>modal.style.display="none");
+    modal.addEventListener("click",e=>{if(e.target===modal)modal.style.display="none";});
+  </script>
+</body>
+</html>
